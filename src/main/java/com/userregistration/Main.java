@@ -1,3 +1,4 @@
+package com.userregistration;
 // Using IUserValidation from external file
 
 public class Main {

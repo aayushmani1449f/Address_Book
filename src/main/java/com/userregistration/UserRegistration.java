@@ -1,3 +1,4 @@
+package com.userregistration;
 import java.util.regex.Pattern;
 
 public class UserRegistration {
