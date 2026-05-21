@@ -2,6 +2,7 @@ package com.employeepayroll;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.sql.SQLException;
 
 public class DBSetup {
     public static void main(String[] args) {
@@ -45,6 +46,9 @@ public class DBSetup {
                 System.out.println("Inserted initial test data into 'employee_payroll'.");
 
             }
+        } catch (SQLException e) {
+            System.err.println("SQL Exception occurred: " + e.getMessage());
+            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -62,7 +62,7 @@ public class EmployeePayrollService {
         } catch (ClassNotFoundException e) {
             System.out.println("Failed to load driver");
         } catch (SQLException e) {
-            System.out.println("Failed to get connection: " + e.getMessage());
+            throw new PayrollDBException("Failed to get connection", e);
         }
     }
 
