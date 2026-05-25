@@ -133,4 +133,26 @@ public class AddressBookDBService implements IAddressBookDataService {
         }
         return contactList;
     }
+
+    public int getCountByCity(String city) {
+        return getCount("SELECT COUNT(*) FROM contacts WHERE city = ?", city);
+    }
+
+    public int getCountByState(String state) {
+        return getCount("SELECT COUNT(*) FROM contacts WHERE state = ?", state);
+    }
+
+    private int getCount(String query, String parameter) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, parameter);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }
