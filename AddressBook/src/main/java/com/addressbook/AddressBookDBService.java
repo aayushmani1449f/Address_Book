@@ -16,7 +16,53 @@ public class AddressBookDBService implements IAddressBookDataService {
 
     @Override
     public void writeData(List<Contact> contacts) {
-        // Implement in UC19
+        for (Contact contact : contacts) {
+            addContactToDB(contact);
+        }
+    }
+
+    public void addContactToDB(Contact contact) {
+        String query = "INSERT INTO contacts (first_name, last_name, address, city, state, zip, phone_number, email, date_added) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            connection.setAutoCommit(false); // DB Transaction implemented
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, contact.getFirstName());
+                preparedStatement.setString(2, contact.getLastName());
+                preparedStatement.setString(3, contact.getAddress());
+                preparedStatement.setString(4, contact.getCity());
+                preparedStatement.setString(5, contact.getState());
+                preparedStatement.setString(6, contact.getZip());
+                preparedStatement.setString(7, contact.getPhoneNumber());
+                preparedStatement.setString(8, contact.getEmail());
+                if (contact.getDateAdded() != null) {
+                    preparedStatement.setDate(9, java.sql.Date.valueOf(contact.getDateAdded()));
+                } else {
+                    preparedStatement.setNull(9, java.sql.Types.DATE);
+                }
+                preparedStatement.executeUpdate();
+                connection.commit();
+            }
+        } catch (SQLException e) {
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override
