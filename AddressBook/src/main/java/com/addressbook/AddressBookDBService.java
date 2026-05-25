@@ -42,7 +42,8 @@ public class AddressBookDBService implements IAddressBookDataService {
                         resultSet.getString("state"),
                         resultSet.getString("zip"),
                         resultSet.getString("phone_number"),
-                        resultSet.getString("email")
+                        resultSet.getString("email"),
+                        resultSet.getDate("date_added") != null ? resultSet.getDate("date_added").toLocalDate() : null
                 );
                 contactList.add(contact);
             }
@@ -94,7 +95,36 @@ public class AddressBookDBService implements IAddressBookDataService {
                         resultSet.getString("state"),
                         resultSet.getString("zip"),
                         resultSet.getString("phone_number"),
-                        resultSet.getString("email")
+                        resultSet.getString("email"),
+                        resultSet.getDate("date_added") != null ? resultSet.getDate("date_added").toLocalDate() : null
+                );
+                contactList.add(contact);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return contactList;
+    }
+
+    public List<Contact> getContactsAddedInPeriod(java.time.LocalDate startDate, java.time.LocalDate endDate) {
+        List<Contact> contactList = new ArrayList<>();
+        String query = "SELECT * FROM contacts WHERE date_added BETWEEN ? AND ?";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setDate(1, java.sql.Date.valueOf(startDate));
+            preparedStatement.setDate(2, java.sql.Date.valueOf(endDate));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Contact contact = new Contact(
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("address"),
+                        resultSet.getString("city"),
+                        resultSet.getString("state"),
+                        resultSet.getString("zip"),
+                        resultSet.getString("phone_number"),
+                        resultSet.getString("email"),
+                        resultSet.getDate("date_added") != null ? resultSet.getDate("date_added").toLocalDate() : null
                 );
                 contactList.add(contact);
             }

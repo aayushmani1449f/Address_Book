@@ -8,7 +8,7 @@ public class Contact {
     private String zip;
     private String phoneNumber;
     private String email;
-
+    private java.time.LocalDate dateAdded;
     public Contact(String firstName, String lastName, String address, String city, String state, String zip, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -18,6 +18,11 @@ public class Contact {
         this.zip = zip;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    public Contact(String firstName, String lastName, String address, String city, String state, String zip, String phoneNumber, String email, java.time.LocalDate dateAdded) {
+        this(firstName, lastName, address, city, state, zip, phoneNumber, email);
+        this.dateAdded = dateAdded;
     }
 
     public String getFirstName() { return firstName; }
@@ -36,6 +41,8 @@ public class Contact {
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+    public java.time.LocalDate getDateAdded() { return dateAdded; }
+    public void setDateAdded(java.time.LocalDate dateAdded) { this.dateAdded = dateAdded; }
 
     @Override
     public String toString() {
