@@ -6,3 +6,4 @@ com\addressbook\DatabaseDateTest.class
 com\addressbook\DatabaseTransactionTest.class
 com\addressbook\JsonFileDataSourceTest.class
 com\addressbook\TextFileDataSourceTest.class
+com\addressbook\RestApiTest.class
