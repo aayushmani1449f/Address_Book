@@ -121,4 +121,36 @@ public class DatabaseDataSource implements AddressBookDataSource {
         }
         return contacts;
     }
+
+    public int getContactCountByCity(String city) {
+        String query = "SELECT COUNT(*) as count FROM contacts WHERE city = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+             
+            pstmt.setString(1, city);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int getContactCountByState(String state) {
+        String query = "SELECT COUNT(*) as count FROM contacts WHERE state = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+             
+            pstmt.setString(1, state);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

@@ -1,6 +1,7 @@
 com\addressbook\DatabaseUpdateTest.class
-com\addressbook\TextFileDataSourceTest.class
 com\addressbook\CsvFileDataSourceTest.class
+com\addressbook\DatabaseCountTest.class
 com\addressbook\DatabaseDataSourceTest.class
 com\addressbook\DatabaseDateTest.class
 com\addressbook\JsonFileDataSourceTest.class
+com\addressbook\TextFileDataSourceTest.class
