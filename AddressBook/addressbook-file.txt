@@ -1,0 +1,1 @@
+Contact{firstName='John', lastName='Doe', address='123 Street', city='NY', state='NY', zip='10001', phoneNumber='1234567890', email='johndoe@email.com'}

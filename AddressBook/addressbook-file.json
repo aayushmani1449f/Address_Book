@@ -1,0 +1,12 @@
+[
+  {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "address": "456 Ave",
+    "city": "SF",
+    "state": "CA",
+    "zip": "94101",
+    "phoneNumber": "0987654321",
+    "email": "janedoe@email.com"
+  }
+]
