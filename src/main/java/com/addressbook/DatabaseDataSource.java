@@ -46,8 +46,49 @@ public class DatabaseDataSource implements AddressBookDataSource {
 
     @Override
     public void writeData(List<Contact> contacts) {
-        // Not implemented for UC 16 (Only Retrieval). 
-        // We will expand this in subsequent UCs.
-        throw new UnsupportedOperationException("Write data not implemented yet.");
+        // Reserved for bulk write if needed
+        throw new UnsupportedOperationException("Bulk write data not implemented yet.");
+    }
+
+    public int updateContactCity(String firstName, String newCity) {
+        String updateQuery = "UPDATE contacts SET city = ? WHERE first_name = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(updateQuery)) {
+            
+            pstmt.setString(1, newCity);
+            pstmt.setString(2, firstName);
+            return pstmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public Contact getContactByName(String firstName) {
+        String query = "SELECT * FROM contacts WHERE first_name = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+             
+            pstmt.setString(1, firstName);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return new Contact(
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("address"),
+                        rs.getString("city"),
+                        rs.getString("state"),
+                        rs.getString("zip"),
+                        rs.getString("phone_number"),
+                        rs.getString("email"),
+                        rs.getDate("date_added").toLocalDate()
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
