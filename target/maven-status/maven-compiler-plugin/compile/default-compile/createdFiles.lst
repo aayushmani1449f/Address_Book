@@ -1,5 +1,6 @@
 com\addressbook\AddressBook.class
 com\addressbook\Contact.class
+com\addressbook\DatabaseDataSource.class
 com\addressbook\JsonFileDataSource$1.class
 com\addressbook\CsvFileDataSource.class
 com\addressbook\AddressBookDataSource.class
