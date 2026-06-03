@@ -1,4 +1,5 @@
 com\addressbook\AddressBook.class
 com\addressbook\Contact.class
+com\addressbook\CsvFileDataSource.class
 com\addressbook\AddressBookDataSource.class
 com\addressbook\TextFileDataSource.class

@@ -1,1 +1,2 @@
 com\addressbook\TextFileDataSourceTest.class
+com\addressbook\CsvFileDataSourceTest.class
