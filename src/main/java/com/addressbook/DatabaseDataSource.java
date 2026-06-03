@@ -153,4 +153,72 @@ public class DatabaseDataSource implements AddressBookDataSource {
         }
         return 0;
     }
+
+    public boolean addContactWithTransaction(Contact contact, List<Integer> typeIds) {
+        String insertContact = "INSERT INTO contacts (first_name, last_name, address, city, state, zip, phone_number, email, date_added) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String insertMapping = "INSERT INTO contact_type_mapping (contact_id, type_id) VALUES (?, ?)";
+        
+        Connection conn = null;
+        try {
+            conn = getConnection();
+            conn.setAutoCommit(false); // Start transaction
+            
+            // 1. Insert Contact
+            int newContactId = -1;
+            try (PreparedStatement pstmtContact = conn.prepareStatement(insertContact, Statement.RETURN_GENERATED_KEYS)) {
+                pstmtContact.setString(1, contact.getFirstName());
+                pstmtContact.setString(2, contact.getLastName());
+                pstmtContact.setString(3, contact.getAddress());
+                pstmtContact.setString(4, contact.getCity());
+                pstmtContact.setString(5, contact.getState());
+                pstmtContact.setString(6, contact.getZip());
+                pstmtContact.setString(7, contact.getPhoneNumber());
+                pstmtContact.setString(8, contact.getEmail());
+                pstmtContact.setDate(9, Date.valueOf(contact.getDateAdded()));
+                
+                pstmtContact.executeUpdate();
+                
+                try (ResultSet rs = pstmtContact.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        newContactId = rs.getInt(1);
+                    }
+                }
+            }
+            
+            // 2. Insert into Mapping
+            if (newContactId != -1 && typeIds != null) {
+                try (PreparedStatement pstmtMapping = conn.prepareStatement(insertMapping)) {
+                    for (int typeId : typeIds) {
+                        pstmtMapping.setInt(1, newContactId);
+                        pstmtMapping.setInt(2, typeId);
+                        pstmtMapping.addBatch();
+                    }
+                    pstmtMapping.executeBatch();
+                }
+            }
+            
+            conn.commit(); // Commit transaction
+            return true;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            if (conn != null) {
+                try {
+                    conn.rollback(); // Rollback transaction on error
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.setAutoCommit(true);
+                    conn.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        return false;
+    }
 }

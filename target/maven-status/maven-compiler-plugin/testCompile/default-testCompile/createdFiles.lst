@@ -3,5 +3,6 @@ com\addressbook\CsvFileDataSourceTest.class
 com\addressbook\DatabaseCountTest.class
 com\addressbook\DatabaseDataSourceTest.class
 com\addressbook\DatabaseDateTest.class
+com\addressbook\DatabaseTransactionTest.class
 com\addressbook\JsonFileDataSourceTest.class
 com\addressbook\TextFileDataSourceTest.class
