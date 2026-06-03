@@ -22,10 +22,10 @@ class DatabaseDataSourceTest {
         List<Contact> contacts = dataSource.readData();
         
         assertNotNull(contacts);
-        // The DB was seeded with at least 1 contact (John Doe) in the setup
+        
         assertFalse(contacts.isEmpty(), "Contact list from DB should not be empty");
         
-        // Let's verify if the seeded contact exists
+        
         boolean hasJohn = contacts.stream().anyMatch(c -> c.getFirstName().equals("John") && c.getLastName().equals("Doe"));
         assertTrue(hasJohn, "Seeded contact John Doe should be found in the database");
     }

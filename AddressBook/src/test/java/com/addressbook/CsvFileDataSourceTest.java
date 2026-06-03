@@ -38,10 +38,10 @@ class CsvFileDataSourceTest {
         
         List<Contact> contacts = Arrays.asList(c1, c2);
         
-        // Write
+        
         dataSource.writeData(contacts);
         
-        // Read
+        
         List<Contact> readContacts = dataSource.readData();
         
         assertEquals(2, readContacts.size());

@@ -37,25 +37,25 @@ public class EmployeePayrollService {
         System.out.println("Avg of salary for Female: " + avgFemale.get("F"));
     }
 
-    // Step 1 - 6 testing connectivity
+    
     private void testConnection() {
         String dbUrl = "jdbc:mysql://localhost:3306/payroll_service?useSSL=false&allowPublicKeyRetrieval=true";
         String user = "root";
         String pass = "Aayush@01";
 
         try {
-            // Check if MySQL JDBC driver class is loaded
+            
             Class.forName("com.mysql.cj.jdbc.Driver");
             System.out.println("Driver loaded");
 
-            // List the MySQL JDBC Drivers Registered
+            
             System.out.println("Registered Drivers:");
             Enumeration<Driver> drivers = DriverManager.getDrivers();
             while (drivers.hasMoreElements()) {
                 System.out.println(drivers.nextElement().getClass().getName());
             }
 
-            // Get the SQL Connection
+            
             try (Connection connection = DriverManager.getConnection(dbUrl, user, pass)) {
                 System.out.println("Connection Established");
             }

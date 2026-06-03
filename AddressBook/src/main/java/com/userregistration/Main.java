@@ -1,5 +1,5 @@
 package com.userregistration;
-// Using IUserValidation from external file
+
 
 public class Main {
     public static void main(String[] args) {

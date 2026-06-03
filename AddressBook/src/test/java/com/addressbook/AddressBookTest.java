@@ -18,9 +18,9 @@ public class AddressBookTest {
         contact1 = new Contact("John", "Doe", "123 Main St", "Anytown", "NY", "12345", "555-1234", "john@test.com");
         contact2 = new Contact("Jane", "Smith", "456 Oak St", "Othertown", "CA", "98765", "555-5678", "jane@test.com");
         
-        // Use reflection or package-private access if addContact doesn't exist for direct objects
-        // Assuming we can add to contacts list directly for testing, or if there's an addContact(Contact) method.
-        // Wait, AddressBook.java only has addContact(Scanner). We must update AddressBook.java to have addContact(Contact) for programmatic adding.
+        
+        
+        
         addressBook.getContacts().add(contact1);
         addressBook.getContacts().add(contact2);
     }

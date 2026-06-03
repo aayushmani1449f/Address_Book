@@ -30,7 +30,7 @@ public class CsvFileDataSource implements AddressBookDataSource {
 
         try (CSVReader reader = new CSVReader(new FileReader(filePath.toFile()))) {
             String[] nextLine;
-            // Skip header
+            
             reader.readNext();
             while ((nextLine = reader.readNext()) != null) {
                 if (nextLine.length == 10) {
@@ -52,7 +52,7 @@ public class CsvFileDataSource implements AddressBookDataSource {
     @Override
     public void writeData(List<Contact> contacts) {
         try (CSVWriter writer = new CSVWriter(new FileWriter(filePath.toFile()))) {
-            // Write header
+            
             String[] header = {"ID", "FirstName", "LastName", "Address", "City", "State", "Zip", "PhoneNumber", "Email", "DateAdded"};
             writer.writeNext(header);
 

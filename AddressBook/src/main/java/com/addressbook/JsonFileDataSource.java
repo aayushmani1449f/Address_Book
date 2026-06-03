@@ -22,7 +22,7 @@ public class JsonFileDataSource implements AddressBookDataSource {
     public JsonFileDataSource(String fileName) {
         this.filePath = Paths.get(fileName);
         
-        // Custom adapter for LocalDate
+        
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(LocalDate.class, (JsonSerializer<LocalDate>) (src, typeOfSrc, context) ->
                 new JsonPrimitive(src.format(DateTimeFormatter.ISO_LOCAL_DATE)));

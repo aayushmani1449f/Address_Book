@@ -31,7 +31,7 @@ public class AddressBookMain {
             System.out.print("Choose an option: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+            scanner.nextLine(); 
 
             switch (choice) {
                 case 1:
@@ -75,7 +75,7 @@ public class AddressBookMain {
         System.out.print("Choice: ");
         
         int choice = scanner.nextInt();
-        scanner.nextLine(); // consume newline
+        scanner.nextLine(); 
 
         switch (choice) {
             case 2: return new TextFileDataSource("contacts.txt");

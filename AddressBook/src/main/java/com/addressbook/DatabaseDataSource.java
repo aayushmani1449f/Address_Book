@@ -46,7 +46,7 @@ public class DatabaseDataSource implements AddressBookDataSource {
 
     @Override
     public void writeData(List<Contact> contacts) {
-        // Reserved for bulk write if needed
+        
         throw new UnsupportedOperationException("Bulk write data not implemented yet.");
     }
 
@@ -161,9 +161,9 @@ public class DatabaseDataSource implements AddressBookDataSource {
         Connection conn = null;
         try {
             conn = getConnection();
-            conn.setAutoCommit(false); // Start transaction
+            conn.setAutoCommit(false); 
             
-            // 1. Insert Contact
+            
             int newContactId = -1;
             try (PreparedStatement pstmtContact = conn.prepareStatement(insertContact, Statement.RETURN_GENERATED_KEYS)) {
                 pstmtContact.setString(1, contact.getFirstName());
@@ -185,7 +185,7 @@ public class DatabaseDataSource implements AddressBookDataSource {
                 }
             }
             
-            // 2. Insert into Mapping
+            
             if (newContactId != -1 && typeIds != null) {
                 try (PreparedStatement pstmtMapping = conn.prepareStatement(insertMapping)) {
                     for (int typeId : typeIds) {
@@ -197,14 +197,14 @@ public class DatabaseDataSource implements AddressBookDataSource {
                 }
             }
             
-            conn.commit(); // Commit transaction
+            conn.commit(); 
             return true;
             
         } catch (SQLException e) {
             e.printStackTrace();
             if (conn != null) {
                 try {
-                    conn.rollback(); // Rollback transaction on error
+                    conn.rollback(); 
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }

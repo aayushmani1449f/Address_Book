@@ -15,14 +15,14 @@ public class DBSetup {
             try (Connection conn = DriverManager.getConnection(dbUrl, user, pass);
                  Statement stmt = conn.createStatement()) {
 
-                // Create database
+                
                 stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS payroll_service");
                 System.out.println("Database 'payroll_service' created or already exists.");
 
-                // Use database
+                
                 stmt.execute("USE payroll_service");
 
-                // Create table
+                
                 String createTableSql = "CREATE TABLE IF NOT EXISTS employee_payroll (" +
                         "id INT NOT NULL AUTO_INCREMENT, " +
                         "name VARCHAR(150) NOT NULL, " +
@@ -34,10 +34,10 @@ public class DBSetup {
                 stmt.executeUpdate(createTableSql);
                 System.out.println("Table 'employee_payroll' created or already exists.");
 
-                // Clear existing data for fresh start
+                
                 stmt.executeUpdate("TRUNCATE TABLE employee_payroll");
 
-                // Insert data
+                
                 stmt.executeUpdate("INSERT INTO employee_payroll (name, salary, start_date, gender) VALUES ('Terisa', 2000000.00, '2023-01-01', 'F')");
                 stmt.executeUpdate("INSERT INTO employee_payroll (name, salary, start_date, gender) VALUES ('Bill', 3500000.00, '2022-05-15', 'M')");
                 stmt.executeUpdate("INSERT INTO employee_payroll (name, salary, start_date, gender) VALUES ('Charlie', 4000000.00, '2021-11-20', 'M')");

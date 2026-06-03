@@ -9,8 +9,8 @@ public class EmployeePayrollServiceTest {
     
     @Before
     public void setup() {
-        // Just calling readData to ensure data is loaded if needed, or restoring DB state if necessary.
-        // For now, DB setup handles initial data.
+        
+        
     }
 
     @Test

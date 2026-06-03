@@ -9,15 +9,15 @@ public class EmployeePayrollData {
     private LocalDate startDate;
     private char gender;
 
-    // UC 2 requirement: Add Start Date to EmployeePayroll Class and ensure backward compatibility
-    // Backward compatible constructor
+    
+    
     public EmployeePayrollData(int id, String name, double salary) {
         this.id = id;
         this.name = name;
         this.salary = salary;
     }
 
-    // Full constructor
+    
     public EmployeePayrollData(int id, String name, double salary, LocalDate startDate, char gender) {
         this(id, name, salary);
         this.startDate = startDate;

@@ -8,7 +8,7 @@ public class AddressBookDBService implements IAddressBookDataService {
 
     private static final String URL = "jdbc:mysql://localhost:3306/address_book_db";
     private static final String USER = "root";
-    private static final String PASSWORD = "password"; // Set actual password
+    private static final String PASSWORD = "password"; 
 
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
@@ -26,7 +26,7 @@ public class AddressBookDBService implements IAddressBookDataService {
         Connection connection = null;
         try {
             connection = getConnection();
-            connection.setAutoCommit(false); // DB Transaction implemented
+            connection.setAutoCommit(false); 
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, contact.getFirstName());
                 preparedStatement.setString(2, contact.getLastName());

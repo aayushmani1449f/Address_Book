@@ -19,7 +19,7 @@ class DatabaseDateTest {
 
     @Test
     void testGetContactsAddedBetween() {
-        // Our test user was added '2023-01-15'
+        
         LocalDate startDate = LocalDate.of(2023, 1, 1);
         LocalDate endDate = LocalDate.of(2023, 12, 31);
         

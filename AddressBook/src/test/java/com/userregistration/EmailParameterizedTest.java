@@ -22,7 +22,7 @@ public class EmailParameterizedTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
-            // Valid cases
+            
             {"abc@yahoo.com", true},
             {"abc-100@yahoo.com", true},
             {"abc.100@yahoo.com", true},
@@ -32,7 +32,7 @@ public class EmailParameterizedTest {
             {"abc@1.com", true},
             {"abc@gmail.com.com", true},
             {"abc+100@gmail.com", true},
-            // Invalid cases
+            
             {"abc", false},
             {"abc@.com.my", false},
             {"abc123@gmail.a", false},
