@@ -91,4 +91,34 @@ public class DatabaseDataSource implements AddressBookDataSource {
         }
         return null;
     }
+
+    public List<Contact> getContactsAddedBetween(LocalDate startDate, LocalDate endDate) {
+        List<Contact> contacts = new ArrayList<>();
+        String query = "SELECT * FROM contacts WHERE date_added BETWEEN ? AND ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+             
+            pstmt.setDate(1, Date.valueOf(startDate));
+            pstmt.setDate(2, Date.valueOf(endDate));
+            
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                contacts.add(new Contact(
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("address"),
+                        rs.getString("city"),
+                        rs.getString("state"),
+                        rs.getString("zip"),
+                        rs.getString("phone_number"),
+                        rs.getString("email"),
+                        rs.getDate("date_added").toLocalDate()
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return contacts;
+    }
 }
