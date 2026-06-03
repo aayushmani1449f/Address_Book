@@ -7,3 +7,4 @@ com\addressbook\CsvFileDataSource.class
 com\addressbook\AddressBookDataSource.class
 com\addressbook\TextFileDataSource.class
 com\addressbook\JsonFileDataSource.class
+com\addressbook\AsyncAddressBookDataSource.class
