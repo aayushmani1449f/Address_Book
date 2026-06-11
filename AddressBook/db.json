@@ -1,3 +1,17 @@
 {
-  "contacts": []
+  "contacts": [
+    {
+      "firstName": "fdghj",
+      "lastName": "cgvh",
+      "address": "wretyugihk",
+      "city": "fcghvjb",
+      "state": "cgvhbj",
+      "zip": "15874",
+      "phoneNumber": "8794512485",
+      "email": "fghb@co.in",
+      "dateAdded": "2026-06-11",
+      "id": "ERKWXhRJyeA"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
